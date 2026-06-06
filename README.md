@@ -4,7 +4,7 @@
 
 ComfyUI custom nodes for [rednote-hilab/dots.tts](https://github.com/rednote-hilab/dots.tts).
 
-
+<img width="1555" height="1146" alt="Screenshot 2026-06-06 054154" src="https://github.com/user-attachments/assets/ffbcd3be-fe89-4d38-85eb-5872635f34f2" />
 
 ## Nodes
 
