@@ -37,6 +37,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "Dots-TTS-ComfyUI",
+        "ver": "90727ab0255a73b5c4ecf0bae5219bf8270de6b0",
         "Node name for S&R": "DotsTTSWhisperTranscribe"
       },
       "widgets_values": [
@@ -46,50 +48,6 @@
         "transcribe",
         30,
         true
-      ]
-    },
-    {
-      "id": 2,
-      "type": "DotsTTSGenerate",
-      "pos": [
-        2502.1407019054354,
-        1603.7832090009038
-      ],
-      "size": [
-        395.58141052593965,
-        302.50985764074403
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "dotstts_model",
-          "type": "DOTSTTS_MODEL",
-          "link": 12
-        }
-      ],
-      "outputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": [
-            9
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DotsTTSGenerate"
-      },
-      "widgets_values": [
-        "Hello! This is Dots TTS running inside ComfyUI.",
-        10,
-        1,
-        1138068484,
-        "randomize",
-        "auto",
-        false,
-        500
       ]
     },
     {
@@ -220,6 +178,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "Dots-TTS-ComfyUI",
+        "ver": "90727ab0255a73b5c4ecf0bae5219bf8270de6b0",
         "Node name for S&R": "DotsTTSLoadModel"
       },
       "widgets_values": [
@@ -228,64 +188,6 @@
         "auto",
         "flash_attention",
         true
-      ]
-    },
-    {
-      "id": 5,
-      "type": "DotsTTSVoiceClone",
-      "pos": [
-        2495.6911936873776,
-        2013.7212323065564
-      ],
-      "size": [
-        402.3748223279754,
-        358.04012513747216
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "dotstts_model",
-          "type": "DOTSTTS_MODEL",
-          "link": 13
-        },
-        {
-          "name": "reference_audio",
-          "type": "AUDIO",
-          "link": 8
-        },
-        {
-          "name": "reference_text",
-          "type": "STRING",
-          "widget": {
-            "name": "reference_text"
-          },
-          "link": 7
-        }
-      ],
-      "outputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": [
-            5
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DotsTTSVoiceClone"
-      },
-      "widgets_values": [
-        "Oh, for heaven’s sake. I leave the room for five minutes, and somehow everything is on fire, someone’s arguing, and nobody has done the one thing I asked. Honestly, I deserve a vacation.",
-        "",
-        10,
-        0,
-        1689868564,
-        "randomize",
-        "auto",
-        false,
-        500
       ]
     },
     {
@@ -339,6 +241,112 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 5,
+      "type": "DotsTTSVoiceClone",
+      "pos": [
+        2495.6911936873776,
+        2013.7212323065564
+      ],
+      "size": [
+        402.3748223279754,
+        358.04012513747216
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "dotstts_model",
+          "type": "DOTSTTS_MODEL",
+          "link": 13
+        },
+        {
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 8
+        },
+        {
+          "name": "reference_text",
+          "type": "STRING",
+          "widget": {
+            "name": "reference_text"
+          },
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "Dots-TTS-ComfyUI",
+        "ver": "90727ab0255a73b5c4ecf0bae5219bf8270de6b0",
+        "Node name for S&R": "DotsTTSVoiceClone"
+      },
+      "widgets_values": [
+        "Oh, for heaven’s sake. I leave the room for five minutes, and somehow everything is on fire, someone’s arguing, and nobody has done the one thing I asked. Honestly, I deserve a vacation.",
+        "",
+        10,
+        1.2,
+        1689868564,
+        "randomize",
+        "auto",
+        false,
+        500
+      ]
+    },
+    {
+      "id": 2,
+      "type": "DotsTTSGenerate",
+      "pos": [
+        2502.1407019054354,
+        1603.7832090009038
+      ],
+      "size": [
+        395.58141052593965,
+        302.50985764074403
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "dotstts_model",
+          "type": "DOTSTTS_MODEL",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "Dots-TTS-ComfyUI",
+        "ver": "90727ab0255a73b5c4ecf0bae5219bf8270de6b0",
+        "Node name for S&R": "DotsTTSGenerate"
+      },
+      "widgets_values": [
+        "Hello! This is Dots TTS running inside ComfyUI.",
+        10,
+        1.2,
+        1138068484,
+        "randomize",
+        "auto",
+        false,
+        500
+      ]
     }
   ],
   "links": [
@@ -440,10 +448,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6588450000000049,
+      "scale": 0.8769226950000005,
       "offset": [
-        -910.6974041963886,
-        -999.9303827734711
+        -1584.1880962433852,
+        -1464.479053996161
       ]
     },
     "frontendVersion": "1.45.15",
