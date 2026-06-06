@@ -1,9 +1,8 @@
 # Dots TTS ComfyUI
 
-[![GitHub release](https://img.shields.io/github/v/tag/Saganaki22/Dots-TTS-ComfyUI?label=version)](https://github.com/Saganaki22/Dots-TTS-ComfyUI/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
-[![ComfyUI-Manager](https://img.shields.io/badge/ComfyUI-Manager-Compatible-green)](https://github.com/ltdrdata/ComfyUI-Manager)
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow)](https://huggingface.co/collections/rednote-hilab/dotstts)
 
 [English](./README.md) | **中文**
 
