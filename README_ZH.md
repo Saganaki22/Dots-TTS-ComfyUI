@@ -100,7 +100,7 @@ BF16 仓库不应包含 `/common/` 文件夹。只需将一个 BF16 模型文件
 
 ## 安装
 
-ComfyUI-Manager 应通过 `pyproject.toml` 中的 Comfy 元数据运行 `install.py`。
+**ComfyUI-Manager（推荐）：** 打开 ComfyUI-Manager，搜索 **Dots TTS**，然后点击安装。ComfyUI-Manager 会自动处理一切。
 
 使用 uv 手动安装依赖：
 

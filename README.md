@@ -97,7 +97,7 @@ The language dropdown is kept to those 24 languages, plus `auto` and `none`: `AR
 
 ## Install
 
-ComfyUI-Manager should run `install.py` from the Comfy metadata in `pyproject.toml`.
+**ComfyUI-Manager (recommended):** Open ComfyUI-Manager, search for **Dots TTS**, and click Install. ComfyUI-Manager will handle everything automatically.
 
 Manual helper install with uv:
 
