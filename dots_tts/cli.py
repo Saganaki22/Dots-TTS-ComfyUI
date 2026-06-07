@@ -101,18 +101,12 @@ def _resolve_attention(attention: str) -> str | None:
     raise ValueError(f"Unsupported attention mode: {attention}")
 
 
-def _progress_bar(current: int, total: int, width: int = 24) -> str:
-    total = max(1, int(total))
-    current = max(0, min(int(current), total))
-    filled = round(width * current / total)
-    return "[" + "#" * filled + "-" * (width - filled) + "]"
-
-
 def main(argv=None):
     args = parse_args(argv)
     import soundfile as sf
     import torch
     from loguru import logger
+    from tqdm import tqdm
 
     from dots_tts.runtime import DotsTtsRuntime
     from dots_tts.utils.logging import configure_logging
@@ -141,8 +135,18 @@ def main(argv=None):
         )
         chunks = []
         total = max(1, int(args.max_generate_length))
-        for index, chunk in enumerate(
-            runtime.generate_stream(
+        cli_progress = tqdm(
+            total=total,
+            desc="[Dots-TTS-ComfyUI] Generating",
+            ascii=False,
+            dynamic_ncols=True,
+            mininterval=0.0,
+            miniters=10,
+            leave=True,
+        )
+        generation_completed = False
+        try:
+            for chunk in runtime.generate_stream(
                 text=args.text,
                 prompt_audio_path=args.prompt_audio,
                 prompt_text=args.prompt_text,
@@ -154,19 +158,16 @@ def main(argv=None):
                 speaker_scale=args.speaker_scale,
                 normalize_text=args.normalize_text,
                 profile_inference=args.profile_inference,
-            ),
-            start=1,
-        ):
-            chunks.append(chunk.detach().float().cpu())
-            if index == 1 or index % 10 == 0:
-                logger.info(
-                    "CLI progress {} {}/{} audio chunks (max patch budget)",
-                    _progress_bar(min(index, total), total),
-                    min(index, total),
-                    total,
-                )
-        if not chunks:
-            raise RuntimeError("Generation produced no audio chunks.")
+            ):
+                chunks.append(chunk.detach().float().cpu())
+                cli_progress.update(1)
+            if not chunks:
+                raise RuntimeError("Generation produced no audio chunks.")
+            generation_completed = True
+        finally:
+            if generation_completed:
+                cli_progress.total = cli_progress.n
+            cli_progress.close()
         audio = torch.cat(chunks, dim=-1)
         sf.write(
             output_path,

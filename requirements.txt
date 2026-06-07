@@ -9,4 +9,4 @@ einops
 loguru
 PyYAML
 torchdiffeq
-
+tqdm>=4.66.0

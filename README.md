@@ -109,6 +109,8 @@ At load time the node assembles an upstream-compatible runtime cache under `runt
 
 `max_audio_patches` on both Generate and Voice Clone is the maximum audio patch budget for that generation, not a text-token limit. The default is `500`. With the bundled configs, one patch is about `0.32` seconds, so `500` is about `160` seconds of audio budget. The model can stop earlier when it reaches EOS; very long text can hit the cap and end early. Voice Clone prompt audio paired with `reference_text` also consumes part of this budget.
 
+Generation uses a live `tqdm` terminal progress bar with percentage, elapsed time, estimated remaining time, and iteration speed. Since Dots TTS decides its final length by EOS during generation, the live total is the configured `max_audio_patches` ceiling; after a successful early stop, the completed bar is normalized to the actual emitted chunk count.
+
 ## Languages
 
 Officially benchmarked: 24 languages — Chinese, English, Cantonese, Japanese, Korean, Arabic, Spanish, Turkish, Indonesian, Portuguese, French, Italian, Dutch, Vietnamese, German, Russian, Ukrainian, Thai, Polish, Romanian, Greek, Czech, Finnish, and Hindi. It may be able to do more languages but those are the ones officially benchmarked. Not all languages produce high quality results — you may need to experiment for yourself to see.

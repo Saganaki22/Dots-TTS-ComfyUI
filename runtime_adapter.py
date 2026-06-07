@@ -2,24 +2,15 @@
 
 from __future__ import annotations
 
-import logging
 import tempfile
 from pathlib import Path
 from typing import Callable
 
 import numpy as np
 import torch
+from tqdm import tqdm
 
 from .loader import DotsTTSBundle, resume_bundle_to_device
-
-logger = logging.getLogger("Dots-TTS-ComfyUI")
-
-
-def _text_progress_bar(current: int, total: int, width: int = 24) -> str:
-    total = max(1, int(total))
-    current = max(0, min(int(current), total))
-    filled = round(width * current / total)
-    return "[" + "#" * filled + "-" * (width - filled) + "]"
 
 
 def manual_seed_all(seed: int) -> None:
@@ -112,6 +103,16 @@ def generate_dotstts(
 
     chunks: list[torch.Tensor] = []
     total = max_audio_patches
+    cli_progress = tqdm(
+        total=total,
+        desc="[Dots-TTS-ComfyUI] Generating",
+        ascii=False,
+        dynamic_ncols=True,
+        mininterval=0.0,
+        miniters=10,
+        leave=True,
+    )
+    generation_completed = False
     try:
         for index, chunk in enumerate(
             bundle.runtime.generate_stream(
@@ -126,22 +127,20 @@ def generate_dotstts(
             start=1,
         ):
             chunks.append(chunk.detach().float().cpu())
+            cli_progress.update(1)
             if progress_callback is not None:
                 progress_callback(min(index, total), total)
-            if index == 1 or index % 10 == 0:
-                logger.info(
-                    "Dots TTS progress %s %d/%d audio chunks (max patch budget)",
-                    _text_progress_bar(min(index, total), total),
-                    min(index, total),
-                    total,
-                )
+        if not chunks:
+            raise RuntimeError("Dots TTS generated no audio chunks.")
+        generation_completed = True
     finally:
+        if generation_completed:
+            cli_progress.total = cli_progress.n
+        cli_progress.close()
         bundle.runtime.max_generate_length = previous_max_audio_patches
         if temp_dir_obj is not None:
             temp_dir_obj.cleanup()
 
-    if not chunks:
-        raise RuntimeError("Dots TTS generated no audio chunks.")
     if progress_callback is not None:
         progress_callback(total, total)
     audio = torch.cat(chunks, dim=-1)
