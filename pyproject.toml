@@ -1,7 +1,7 @@
 [project]
 name = "Dots-TTS-ComfyUI"
 description = "ComfyUI custom nodes for rednote-hilab dots.tts with model loading, generation, voice cloning, Whisper transcription, progress tracking, and AIMDO memory visualization"
-version = "0.1.1"
+version = "0.1.2"
 license = {file = "LICENSE"}
 dependencies = []
 
